@@ -4,11 +4,14 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 
 import com.borges.gameland.dummy.DummyContentGames.DummyItem
+import com.bumptech.glide.Glide
 
 class MyGameRecyclerViewAdapter(
+    private val context: RecyclerView,
     private val values: List<DummyItem>
 ) : RecyclerView.Adapter<MyGameRecyclerViewAdapter.ViewHolder>() {
 
@@ -19,19 +22,25 @@ class MyGameRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        val games = values[position]
+        holder.bind(games)
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
-        val contentView: TextView = view.findViewById(R.id.content)
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(movies: DummyItem) {
+            val contentView: TextView = itemView.findViewById(R.id.content)
+            val imgMovie: ImageView = itemView.findViewById(R.id.photo_id)
+            contentView.text = movies.content
 
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            Glide
+                .with(context)
+                .load(movies.photo)
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(imgMovie)
         }
+
     }
 }

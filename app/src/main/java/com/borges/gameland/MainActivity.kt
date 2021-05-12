@@ -2,11 +2,7 @@ package com.borges.gameland
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
-import androidx.appcompat.view.menu.MenuView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -39,12 +35,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mudarFragmentFilmes() {
-        supportActionBar?.title = "Filmes"
+        supportActionBar?.title = "Top 25 Filmes"
         changeFragment(MovieFragment())
     }
 
     private fun mudarFragmentGames() {
-        supportActionBar?.title = "Games"
+        supportActionBar?.title = "Top 25 Games"
         changeFragment(GameFragment())
     }
 
